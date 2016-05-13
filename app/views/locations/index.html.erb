@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<% provide(:title, "Home") %>
 <h1>Listing Locations</h1>
 <%= form_tag locations_path, :method => :get do %>
   <p>
@@ -7,9 +7,11 @@
     <%= submit_tag "Search Near", :name => nil %>
   </p>
 <% end %>
-<table>
+<div class="center jumbotron">
+<div class="table-responsive">
+<table class="table table-hover table-bordered table-condensed">
   <thead>
-    <tr>
+    <tr class="success">
       <th>Address</th>
       <th>Latitude</th>
       <th>Longitude</th>
@@ -19,7 +21,7 @@
 
   <tbody>
     <% @locations.each do |location| %>
-      <tr>
+      <tr class="info">
         <td><%= location.address %></td>
         <td><%= location.latitude %></td>
         <td><%= location.longitude %></td>
@@ -30,7 +32,9 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
+</div>
 <br>
 
 <%= link_to 'New Location', new_location_path %>
+<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>

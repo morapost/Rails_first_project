@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
+  
+
+  
   resources :locations
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
+  root 'locations#index'
+  get 'help'    => 'locations#help'
+  get 'about'   => 'locations#about'
+  get 'contact' => 'locations#contact'
+  get 'signup'  => 'users#new'
+  resources :users
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

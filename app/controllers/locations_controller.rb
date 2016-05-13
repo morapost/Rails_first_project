@@ -1,11 +1,24 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
-  # GET /locations
+
+  def home
+  end
+
+  def help
+  end
+
+  def about
+  end
+  def contact
+  end
+
+    # GET /locations
   # GET /locations.json
+
  def index
   if params[:search].present?
-    @locations = Location.near(params[:search], 50, :order => :distance)
+    @locations = Location.near(params[:search], 50)
   else
     @locations = Location.all
   end
@@ -32,9 +45,11 @@ end
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
+        flash[:success] = 'Location was successfully created.'
+        format.html { redirect_to @location }
         format.json { render :show, status: :created, location: @location }
       else
+        flash[:danger] = 'Problem creating Location'
         format.html { render :new }
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
@@ -46,9 +61,11 @@ end
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
+        flash[:success] = 'Location was successfully updated.'
+        format.html { redirect_to @location }
         format.json { render :show, status: :ok, location: @location }
       else
+        flash[:danger] = 'Problem updating location'
         format.html { render :edit }
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
